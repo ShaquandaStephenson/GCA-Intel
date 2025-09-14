@@ -1,0 +1,421 @@
+/* Add your CSS here */
+
+/* Define color variables for easy use in your CSS */
+:root {
+  /* Cyan */
+  --color-cyan: #13B5EA;
+  /* Navy */
+  --color-navy: #174A7C;
+  /* Yellow */
+  --color-yellow: #FFE800;
+  /* Light Orange */
+  --color-light-orange: #FDB913;
+  /* Light Green */
+  --color-light-green: #A0CF67;
+  /* Coll Grey */
+  --color-coll-grey: #717073;
+  /* Intel Blue */
+  --color-intel-blue: #007DC3;
+  /* White (added for consistency) */
+  --color-white: #ffffff;
+  
+  /* Layout variables for easier maintenance */
+  --card-gap: 18px;
+  --card-height: 340px;
+  --section-padding: 20px;
+}
+
+/* Set the default font for the whole page */
+body {
+  font-family: "Roboto", "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+  overflow-x: hidden; /* Prevent body horizontal scroll */
+}
+
+/* Set font family for all headers */
+h1, h2, h3 {
+  font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Top Navigation Bar Styles */
+nav {
+  background-color: var(--color-coll-grey);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+}
+
+/* Intel logo on nav bar */
+.nav-logo {
+  height: 20px;
+}
+
+/* Language selector styles */
+.nav-language {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Style the dropdown */
+.nav-language select {
+  padding: 4px 8px;
+  border-radius: 1px;
+  border: 1px solid #ccc;
+}
+
+/* Center everything in the hero section */
+header {
+  background-color: var(--color-intel-blue);
+  text-align: center;
+  padding: 32px 16px;
+}
+
+/* Remove white overlay pseudo-element */
+header::before {
+  display: none;
+}
+
+/* Hero Section Heading: Make it yellow */
+header h1 {
+  color: var(--color-yellow);
+  margin-bottom: 20px;
+}
+
+/* Style the tagline/description (first p in header) */
+header p {
+  color: var(--color-white);
+  font-size: 1.2em;
+  margin-bottom: 0;
+}
+
+/* Change the size of the Intel logo in the header section */
+.hero-logo {
+  height: 28px;
+  margin-bottom: 10px;
+}
+
+/* ===== TIMELINE CARDS SECTION - COMPLETELY FIXED ===== */
+section {
+  background-color: var(--color-coll-grey);
+  padding: 24px 0;
+  
+  /* FIXED: Proper flexbox setup for horizontal scrolling */
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; /* Prevent stretching issues */
+  
+  /* FIXED: Remove justify-content: center - this was hiding first cards */
+  /* Add proper padding for first/last card visibility */
+  padding-left: var(--section-padding);
+  padding-right: var(--section-padding);
+  
+  /* FIXED: Proper scrolling setup */
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 100vw;
+  
+  /* ENHANCED: Auto-snap with smooth behavior */
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-left: var(--section-padding);
+  scroll-padding-right: var(--section-padding);
+  -webkit-overflow-scrolling: touch;
+  
+  /* FIXED: Exactly 4 cards visible with proper gap */
+  gap: var(--card-gap);
+  
+  /* ENHANCED: Visible minimalist scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-intel-blue) rgba(255, 255, 255, 0.2);
+}
+
+/* Enhanced webkit scrollbar styling */
+section::-webkit-scrollbar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+section::-webkit-scrollbar-thumb {
+  background: var(--color-intel-blue);
+  border-radius: 4px;
+  transition: background 0.3s ease;
+}
+
+section::-webkit-scrollbar-thumb:hover {
+  background: var(--color-navy);
+}
+
+section::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* ===== INDIVIDUAL CARD STYLING - DRAMATIC EFFECTS ===== */
+section > div {
+  /* FIXED: Exactly 4 cards visible calculation */
+  flex: 0 0 calc((100vw - (var(--section-padding) * 2) - (var(--card-gap) * 3)) / 4);
+  min-width: calc((100vw - (var(--section-padding) * 2) - (var(--card-gap) * 3)) / 4);
+  max-width: calc((100vw - (var(--section-padding) * 2) - (var(--card-gap) * 3)) / 4);
+  height: var(--card-height);
+  
+  /* Enhanced visual styling */
+  background: var(--color-white);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  
+  /* ENHANCED: Auto-snap alignment */
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  
+  /* DRAMATIC: Multi-layer shadows for depth */
+  box-shadow: 
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.04);
+  
+  /* DRAMATIC: Smooth, bouncy animations */
+  transition: 
+    transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+    box-shadow 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    filter 0.3s ease;
+}
+
+/* DRAMATIC: Enhanced hover effects */
+section > div:hover {
+  /* More dramatic lift and scale */
+  transform: translateY(-12px) scale(1.03);
+  
+  /* DRAMATIC: Multi-layer hover shadows */
+  box-shadow: 
+    0 25px 50px rgba(23, 74, 124, 0.25),
+    0 15px 30px rgba(0, 0, 0, 0.15),
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  
+  /* Subtle brightness enhancement */
+  filter: brightness(1.05) saturate(1.1);
+}
+
+/* Accessibility: Focus states for keyboard navigation */
+section > div:focus-visible {
+  outline: 3px solid var(--color-yellow);
+  outline-offset: 4px;
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(23, 74, 124, 0.2),
+    0 10px 25px rgba(0, 0, 0, 0.12);
+}
+
+/* ===== IMAGE STYLING - TAKES UP MOST OF THE BOX ===== */
+section > div img.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* DRAMATIC: Enhanced zoom effect on image hover */
+section > div:hover img.card-image {
+  transform: scale(1.08);
+}
+
+/* ===== INITIAL CARD INFO - YEAR AND TITLE ONLY ===== */
+.card-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 18px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
+  color: var(--color-white);
+  z-index: 2;
+  transition: opacity 0.4s ease;
+}
+
+/* Hide initial info on hover */
+section > div:hover .card-info {
+  opacity: 0;
+}
+
+/* Year styling */
+.card-year {
+  display: block;
+  font-size: 1rem;
+  font-weight: 300;
+  margin-bottom: 6px;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
+
+/* Title styling */
+.card-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* ===== INTEL BLUE OVERLAY - COVERS ENTIRE BOX ON HOVER ===== */
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  /* ENHANCED: Gradient overlay for more visual appeal */
+  background: linear-gradient(135deg, var(--color-intel-blue), var(--color-navy));
+  color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  z-index: 3;
+}
+
+/* Show overlay on hover */
+section > div:hover .card-overlay {
+  transform: translateY(0);
+}
+
+/* ===== OVERLAY CONTENT STYLING ===== */
+.overlay-content {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: 
+    opacity 0.4s ease 0.2s,
+    transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s;
+}
+
+/* Show overlay content on hover */
+section > div:hover .overlay-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Overlay text elements */
+.overlay-year {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 300;
+  margin-bottom: 10px;
+  opacity: 0.9;
+  letter-spacing: 1px;
+}
+
+/* Overlay Title: Make it yellow */
+.overlay-title {
+  color: var(--color-yellow);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Overlay Description */
+.overlay-description {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  opacity: 0.95;
+}
+
+/* DRAMATIC: Enhanced overlay button */
+.overlay-link {
+  color: var(--color-intel-blue);
+  background: linear-gradient(45deg, var(--color-yellow), #ffed4e);
+  border: none;
+  padding: 12px 24px;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: inline-block;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(255, 232, 0, 0.3);
+  transition: 
+    all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    box-shadow 0.3s ease;
+}
+
+/* DRAMATIC: Button hover effect */
+.overlay-link:hover {
+  background: linear-gradient(45deg, var(--color-intel-blue), #0099d4);
+  color: var(--color-yellow);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 
+    0 8px 25px rgba(0, 125, 195, 0.4),
+    0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ===== RESPONSIVE DESIGN - MAINTAINS OPTIMAL VIEWING ===== */
+@media (max-width: 1400px) {
+  :root {
+    --card-gap: 16px;
+    --section-padding: 16px;
+  }
+  
+  section > div {
+    height: 320px;
+  }
+}
+
+@media (max-width: 1200px) {
+  /* Show 3 cards on large tablets */
+  section > div {
+    flex: 0 0 calc((100vw - (var(--section-padding) * 2) - (var(--card-gap) * 2)) / 3);
+    min-width: calc((100vw - (var(--section-padding) * 2) - (var(--card-gap) * 2)) / 3);
+    max-width: calc((100vw - (var(--section-padding) * 2) - (var(--card-gap) * 2)) / 3);
+  }
+}
+
+@media (max-width: 900px) {
+  /* Show 2 cards on tablets */
+  section > div {
+    flex: 0 0 calc((100vw - (var(--section-padding) * 2) - var(--card-gap)) / 2);
+    min-width: calc((100vw - (var(--section-padding) * 2) - var(--card-gap)) / 2);
+    max-width: calc((100vw - (var(--section-padding) * 2) - var(--card-gap)) / 2);
+    height: 300px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Show 1 card on mobile */
+  :root {
+    --section-padding: 12px;
+  }
+  
+  section {
+    flex-direction: column; /* Stack cards vertically */
+    align-items: center;    /* Center cards in the section */
+    overflow-x: unset;      /* Remove horizontal scroll */
+    overflow-y: auto;       /* Enable vertical scroll if needed */
+    gap: 16px;              /* Space between stacked cards */
+  }
+  section > div {
+    flex: 0 0 calc(100vw - (var(--section-padding) * 2));
+    min-width: calc(100vw - (var(--section-padding) * 2));
+    max-width: calc(100vw - (var(--section-padding) * 2));
+    height: 220px;          /* Reduce height for small screens */
+  }
+  
+  .card-info, .card-overlay {
+    padding: 16px;
+  }
+  
+  .overlay-title {
+    font-size: 1.3rem;
+  }
+}
